@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zm.admin.mapper.RoleMenuMapper">
+	<insert id="insert">
+		insert into
+		role_menu_limit(role_id,menu_id) values(
+		#{roleId,jdbcType=NUMERIC},
+		#{menuId,jdbcType=NUMERIC}
+		);
+	</insert>
+	<delete id="deleterole" parameterType="int">
+		delete from role_menu_limit where
+		role_id=#{roleId}
+	</delete>
+	<delete id="deletemenu" parameterType="int">
+		delete from role_menu_limit where
+		menu_id=#{menuId}
+	</delete>
+	<!-- 更新菜单的角色 -->
+	<update id="updaterole" >
+		update role_menu_limit set
+		role_id=#{roleId,jdbcType=NUMERIC}
+		where menu_id=#{menuId}
+	</update>
+	<!-- 更新角色的菜单-->
+	<update id="updatemenu">
+		update role_menu_limit set
+		menu_id=#{menuId,jdbcType=NUMERIC}
+		where role_id=#{roleId}
+	</update>
+	<select id="selectrole" parameterType="int" resultType="int">
+		select role_id from
+		role_menu_limit where menu_id=#{menuId}
+	</select>
+	<select id="selectmenu" parameterType="int" resultType="int">
+		select menu_id from
+		role_menu_limit where role_id=#{roleId}
+	</select>
+</mapper>
