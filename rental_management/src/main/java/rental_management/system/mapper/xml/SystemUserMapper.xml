@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rental_management.system.mapper.SystemUserMapper">
+	<resultMap type="rental_management.system.bean.SystemUser"
+		id="userMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="phone" column="phone" />
+		<result property="sex" column="sex" />
+		<result property="status" column="status" />
+		<result property="roleId" column="role_id" />
+	</resultMap>
+	<select id="list" resultMap="userMap">
+		select
+		id,name,password,phone,sex,status,role_id from tbl_system_user_info
+	</select>
+	
+	<select id="getSystemUser" resultMap="userMap" parameterType="string">
+	    select id,name,password,phone,sex,status,role_id from tbl_system_user_info where name=#{name}
+	</select>
+	
+	<insert id="insert"  parameterType="rental_management.system.bean.SystemUser">
+	insert into tbl_system_user_info(name,password,phone,sex,status,role_id) values(
+	#{name,jdbcType=VARCHAR},
+	#{password,jdbcType=VARCHAR},
+	#{phone,jdbcType=VARCHAR},
+	#{sex,jdbcType=NUMERIC},
+	#{status,jdbcType=VARCHAR},
+	#{roleId,jdbcType=NUMERIC}
+	);
+	</insert>
+
+	
+</mapper>
